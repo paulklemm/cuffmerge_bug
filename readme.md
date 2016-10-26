@@ -76,9 +76,9 @@ You can find the logs under [releases](https://github.com/paulklemm/cuffmerge_bu
 ## Collection of Threads explaining the Problem
 
 - [SEQanswers: Cuffmerge duplicate/invalid 'transcript'](http://seqanswers.com/forums/showthread.php?t=70357): No solution
-- [Google Groups: Error: duplicate GFF ID 'ENST00000361547.2' encountered](https://groups.google.com/forum/#!topic/tuxedo-tools-users/smF5YxUmVq4): Solved by updating to Cufflinks 2.2.1. Since this is the one I'm using, this does not fix the problem.
+- [Google Groups: Error: duplicate GFF ID 'ENST00000361547.2' encountered](https://groups.google.com/forum/#!topic/tuxedo-tools-users/smF5YxUmVq4): Solved by updating to Cufflinks 2.2.1. Since this is the one I'm using, this does not fix the problem → Posted answer here
 - [Biostars: Running Cuffmerge error "duplicate/invalid 'transcript'](https://www.biostars.org/p/155160/): No solution
 - [Biostars: Cuffmerge running error](https://www.biostars.org/p/119915/): No solution
 - [Biostars: CuffMerge Error: GFF Error: duplicate/invalid 'transcript' feature](https://biostar.usegalaxy.org/p/17359/): No solution
-- [Github: Cuffmerge GFF Error: duplicate/invalid 'transcript'](https://github.com/cole-trapnell-lab/cufflinks/issues/77): Bug report
+- [Github: Cuffmerge GFF Error: duplicate/invalid 'transcript'](https://github.com/cole-trapnell-lab/cufflinks/issues/77): Bug report → Added this example there
 - [Galaxy Mailing List: Cuffmerge error: duplicate GFF ID encountered](https://lists.galaxyproject.org/pipermail/galaxy-user/2013-July/006332.html): Use iGenomes GTF files
