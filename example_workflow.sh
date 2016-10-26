@@ -12,7 +12,7 @@ gunzip Mus_musculus.GRCm38.86.gff3.gz
 
 echo "Build HISAT2 Genome Index"
 mkdir hisat2_build
-hisat2-build Mus_musculus.GRCm38.dna.primary_assembly.fa hisat2_build -p 6
+hisat2-build Mus_musculus.GRCm38.dna.primary_assembly.fa hisat2_build/Mus_musculus.GRCm38.dna.primary_assembly -p 6
 
 echo "Extract spliced sites from reference transcripts"
 extract_splice_sites.py Mus_musculus.GRCm38.86.gff3 > splicesites.txt
@@ -21,19 +21,20 @@ extract_splice_sites.py Mus_musculus.GRCm38.86.gff3 > splicesites.txt
 cd ..
 
 echo "Download RNA-Seq reads"
-wget https://owncloud.sf.mpg.de/index.php/s/bK9xC80OGxKaG9k/download
-tar -xzf reads.tar
+wget -O reads.tar https://owncloud.sf.mpg.de/index.php/s/bK9xC80OGxKaG9k/download
+tar -xf reads.tar
+rm reads.tar
 
 echo "Run HISAT2 alignment"
 mkdir -p alignments/genome
-hisat2 -p 8 --known-splicesite-infile annotation/splicesites.txt --dta-cufflinks -x annotation/hisat2_build -1 reads/rep1_1 -2 reads/rep1_2 -S alignments/genome/rep1.sam
-hisat2 -p 8 --known-splicesite-infile annotation/splicesites.txt --dta-cufflinks -x annotation/hisat2_build -1 reads/rep2_1 -2 reads/rep2_2 -S alignments/genome/rep2.sam
+hisat2 -p 8 --known-splicesite-infile annotation/splicesites.txt --dta-cufflinks -x annotation/hisat2_build/Mus_musculus.GRCm38.dna.primary_assembly -1 reads/rep1_1.fa.gz -2 reads/rep1_2.fa.gz -S alignments/genome/rep1.sam
+hisat2 -p 8 --known-splicesite-infile annotation/splicesites.txt --dta-cufflinks -x annotation/hisat2_build/Mus_musculus.GRCm38.dna.primary_assembly -1 reads/rep2_1.fa.gz -2 reads/rep2_2.fa.gz -S alignments/genome/rep2.sam
 echo "Convert SAM to BAM files"
 samtools view -b -S alignments/genome/rep1.sam > alignments/genome/rep1.bam
 samtools view -b -S alignments/genome/rep2.sam > alignments/genome/rep2.bam
 echo "Sort BAM files"
-srun samtools sort -o alignments/genome/rep1.sorted.bam alignments/genome/rep1.bam
-srun samtools sort -o alignments/genome/rep2.sorted.bam alignments/genome/rep2.bam
+samtools sort -o alignments/genome/rep1.sorted.bam alignments/genome/rep1.bam
+samtools sort -o alignments/genome/rep2.sorted.bam alignments/genome/rep2.bam
 
 echo "Run Cufflinks"
 mkdir -p alignments/transcripts
@@ -41,6 +42,7 @@ cufflinks -q -p 8 --library-type fr-firststrand -g annotation/Mus_musculus.GRCm3
 cufflinks -q -p 8 --library-type fr-firststrand -g annotation/Mus_musculus.GRCm38.86.gff3 -o alignments/transcripts/rep2 alignments/genome/rep2.sorted.bam
 
 echo "Run Cuffmerge"
+# Create list of files to merge from scratch
 > merge_list.txt
 echo "alignments/transcripts/rep1/transcripts.gtf" >> merge_list.txt
 echo "alignments/transcripts/rep2/transcripts.gtf" >> merge_list.txt
