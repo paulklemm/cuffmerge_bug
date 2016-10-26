@@ -13,4 +13,14 @@ Error: could not execute gtf_to_sam
 
 ## Run Script with output Log
 
-./example_workflow > output.log 2>&1
+```bash
+mkdir logs
+./example_workflow_gff3 > logs/output_gff3.log 2>&1
+./example_workflow_gtf > logs/output_gtf.log 2>&1
+```
+
+## Versions
+
+- Samtools: Version 1.3.1 (using htslib 1.3.1)
+- HISAT2: Version 2.0.4
+- Cufflinks Version 2.2.1 linked against Boost version 104700
