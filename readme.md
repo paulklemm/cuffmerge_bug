@@ -49,6 +49,10 @@ Running the exact same analysis using the GTF file works fine. The entries betwe
 1	havana	three_prime_utr	4774436	4774516	.	-	.	gene_id "ENSMUSG00000033845"; gene_version "13"; transcript_id "ENSMUST00000045689"; transcript_version "13"; gene_name "Mrpl15"; gene_source "ensembl_havana"; gene_biotype "protein_coding"; havana_gene "OTTMUSG00000029329"; havana_gene_version "3"; transcript_name "Mrpl15-003"; transcript_source "havana"; transcript_biotype "nonsense_mediated_decay"; havana_transcript "OTTMUST00000072661"; havana_transcript_version "1"; transcript_support_level "1";
 ```
 
+You see that the entries differ between the `gtf` and the `gff3` files, which might cause the problem.
+
+Removing the corresponding lines in the `gff3` file yields in the same error just with another transcript ID.
+
 ## Run Script with Output Log
 
 ```bash
@@ -62,3 +66,14 @@ mkdir logs
 - Samtools: Version 1.3.1 (using htslib 1.3.1)
 - HISAT2: Version 2.0.4
 - Cufflinks Version 2.2.1 linked against Boost version 104700
+
+## Collection of Threads explaining the Problem
+
+- [SEQanswers: Cuffmerge duplicate/invalid 'transcript'](http://seqanswers.com/forums/showthread.php?t=70357): No solution
+- [SEQanswers: Cuffmerge duplicate/invalid 'transcript'](http://seqanswers.com/forums/showthread.php?t=70357): No solution
+- [Google Groups: Error: duplicate GFF ID 'ENST00000361547.2' encountered](https://groups.google.com/forum/#!topic/tuxedo-tools-users/smF5YxUmVq4): Solved by updating to Cufflinks 2.2.1. Since this is the one I'm using, this does not fix the problem.
+- [Biostars: Running Cuffmerge error "duplicate/invalid 'transcript'](https://www.biostars.org/p/155160/): No solution
+- [Biostars: Cuffmerge running error](https://www.biostars.org/p/119915/): No solution
+- [Biostars: CuffMerge Error: GFF Error: duplicate/invalid 'transcript' feature](https://biostar.usegalaxy.org/p/17359/): No solution
+- [Github: Cuffmerge GFF Error: duplicate/invalid 'transcript'](https://github.com/cole-trapnell-lab/cufflinks/issues/77): Bug report
+- [Galaxy Mailing List: Cuffmerge error: duplicate GFF ID encountered](https://lists.galaxyproject.org/pipermail/galaxy-user/2013-July/006332.html): Use iGenomes GTF files
