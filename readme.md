@@ -13,7 +13,7 @@ Error: could not execute gtf_to_sam
 
 Running the exact same analysis using the GTF file works fine. The entries between the GTF and GFF3 also differ, probably causing this problem.
 
-## All entries for `ENSMUST00000045689` in GFF3 and GTF file for Mus.Musculus ensemble.86
+## All entries for `ENSMUST00000045689` in GFF3 and GTF file for Mus.Musculus ensembl.86
 
 ### `Mus_musculus.GRCm38.86.gff3`
 
