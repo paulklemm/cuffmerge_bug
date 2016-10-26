@@ -61,6 +61,12 @@ mkdir logs
 ./example_workflow_gtf.sh > logs/output_gtf.log 2>&1
 ```
 
+You will see that the analysis with the `gff3` file fails, while the one with the `gtf` file succeeds.
+
+## Logs
+
+You can find the logs under [releases](https://github.com/paulklemm/cuffmerge_bug/releases).
+
 ## Versions
 
 - Samtools: Version 1.3.1 (using htslib 1.3.1)
