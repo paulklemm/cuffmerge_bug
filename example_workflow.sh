@@ -43,7 +43,7 @@ cufflinks -q -p 8 --library-type fr-firststrand -g annotation/Mus_musculus.GRCm3
 
 echo "Run Cuffmerge"
 # Create list of files to merge from scratch
-> merge_list.txt
+echo "" > merge_list.txt
 echo "alignments/transcripts/rep1/transcripts.gtf" >> merge_list.txt
 echo "alignments/transcripts/rep2/transcripts.gtf" >> merge_list.txt
 cuffmerge -p 8 -o alignments/transcripts/merged -g annotation/Mus_musculus.GRCm38.86.gff3 -s annotation/Mus_musculus.GRCm38.dna.primary_assembly.fa merge_list.txt
