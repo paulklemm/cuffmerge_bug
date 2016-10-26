@@ -1,18 +1,19 @@
+#!/bin/bash
 # Remove existing files
-rm -r alignments
-rm -r annotation
-rm -r reads
+rm -r alignments/
+rm -r annotation/
+rm -r reads/
 rm merge_list.txt
 # Download all required annotation files
 mkdir annotation
 cd annotation
 
 echo "Download & unzip Mus Musculus GRCm38 primary assembly FASTA DNA file from ensembl (R.86)"
-wget ftp://ftp.ensembl.org/pub/release-86/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
+wget --quiet ftp://ftp.ensembl.org/pub/release-86/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
 gunzip Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
 
 echo "Download & unzip Mus Musculus GRCm38 Transcript file (GFF3, R.86)"
-wget ftp://ftp.ensembl.org/pub/release-86/gtf/mus_musculus/Mus_musculus.GRCm38.86.gtf.gz
+wget --quiet ftp://ftp.ensembl.org/pub/release-86/gtf/mus_musculus/Mus_musculus.GRCm38.86.gtf.gz
 gunzip Mus_musculus.GRCm38.86.gtf.gz
 
 echo "Build HISAT2 Genome Index"
@@ -26,7 +27,7 @@ extract_splice_sites.py Mus_musculus.GRCm38.86.gtf > splicesites.txt
 cd ..
 
 echo "Download RNA-Seq reads"
-wget -O reads.tar https://owncloud.sf.mpg.de/index.php/s/bK9xC80OGxKaG9k/download
+wget --quiet -O reads.tar https://owncloud.sf.mpg.de/index.php/s/bK9xC80OGxKaG9k/download
 tar -xf reads.tar
 rm reads.tar
 

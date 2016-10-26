@@ -1,5 +1,6 @@
 annotation/
 alignments/
 reads/
+logs/
 merge_list.txt
 reads.tar
